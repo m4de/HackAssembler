@@ -28,11 +28,17 @@ class Parser {
     }
 
     /**
+     * Skips over whitespace and comments, if necessary.
      * Reads the next instruction from the input, and makes it the current instruction.
      * This method should be called only if {@link #hasMoreLines() hasMoreLines} is true.
      * Initially there is no current instruction.
      */
     void advance() {
-        currentInstruction = scanner.nextLine();
+        String line = scanner.nextLine();
+        if (!(line.isEmpty() || line.startsWith("//"))) {
+            currentInstruction = line;
+        } else {
+            advance();
+        }
     }
 }
