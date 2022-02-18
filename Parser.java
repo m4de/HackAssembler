@@ -42,7 +42,10 @@ class Parser {
     void advance() {
         String line = scanner.nextLine();
         if (!(line.isEmpty() || line.startsWith("//"))) {
-            currentInstruction = line;
+            if (line.contains("//")) {
+                line = line.substring(0, line.indexOf("//"));
+            }
+            currentInstruction = line.trim();
         } else {
             advance();
         }
